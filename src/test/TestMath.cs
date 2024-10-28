@@ -109,5 +109,18 @@ namespace test
             //assert
             parser.Variables[varName].Value.Number().Should().Be(Math.PI.AsCosmosNumber());
         }
+        [Fact]
+        public void TestRootMinus()
+        {
+            //arrange
+            var varName = "#number";
+            BuildSnippetInterpreter(BuildAllocationSnippet(varName,"2^-1"));
+
+            //act
+            interpreter.Execute().Should().BeTrue();
+
+            //assert
+            parser.Variables[varName].Value.Number().Value.Should().Be(0.5m);
+        }
     }
 }
